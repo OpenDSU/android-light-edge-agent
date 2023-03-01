@@ -1,0 +1,88 @@
+Things to do:
+    o NDK installation task for Windows and Mac
+    o see if I can add the NDK install task into build.gradle
+
+
+Android Studio 4.1
+
+Install NDK
+    SDK Manager > SDK Tools > Show Package Details > NDK (Side by side) > 21.3.6528147
+    
+    
+#App Info > Permissions > (3 dots) > All permissions >  
+
+Go inside app/src/main/assets/nodejs-project/ and run
+    npm install
+
+How to use SDK Manager
+    ${android_sdk}/tools/bin/
+    ${android_sdk}/Sdk/cmdline-tools/latest/bin/sdkmanager
+
+    ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager ---list
+
+    Output:
+
+    Installed
+    ...
+    ndk;21.3.6528147                                   | 21.3.6528147 | NDK (Side by side) 21.3.6528147         | ndk/21.3.6528147/
+
+
+    Available
+    ...
+    ndk;16.1.4479499                                                                         | 16.1.4479499 | NDK (Side by side) 16.1.4479499
+
+
+    Command samples
+    ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --install "ndk;16.1.4479499"
+
+    https://developer.android.com/studio/command-line/sdkmanager
+
+    Steps (clean Xubuntu 20):
+    ========================
+    Warning: Build process will occupy around 5GB of space.
+
+    o Java installed
+        java --version
+
+    o Android SDK installed
+        https://developer.android.com/studio#downloads (seek Command line tools only) aprox. 83MB
+
+        Expand it into
+            ${android_sdk}/cmdline-tools/latest/
+
+    o Install SDK parts
+
+        Install NDK through Gradle
+            ./gradlew -q installNDK
+
+        (optional) See what's installed
+            ${android_sdk}/cmdline-tools/latest/bin/sdkmanager --list
+
+        (optional)Install NDK
+            echo "Y" | ${android_sdk}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.3.6528147"
+            or
+            echo "Y" | ${android_sdk}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.1.6352462"
+
+            Note: You need to install this by hand as Gradle does not automatically agree on licenses.
+
+    o Build it
+        git clone https://github.com/PrivateSky/android-edge-agent.git
+
+        cd android-edge-agent
+
+        touch local.properties
+
+        add SKD to local.properties
+            nano local.properties
+
+            sdk.dir = ${android_sdk}
+
+        ?add NDK too ?
+            ndk.dir=/home/alex/Android/Sdk/ndk/21.3.6528147
+
+        chmod +x gradlew
+
+        ./gradlew
+
+    o
+
